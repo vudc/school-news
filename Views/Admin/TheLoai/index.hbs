@@ -1,0 +1,68 @@
+{{#section 'js_frame'}}
+<!-- Page level plugins -->
+<script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Page level custom scripts -->
+<script src="/admin/js/demo/datatables-demo.js"></script>
+{{/section}}
+{{#section 'css'}}
+<link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{{/section}}
+{{!-- {{#section 'js'}}
+<script>
+    $('.chord-hover').hover(function () {
+        var chordname = $(this).data('chord');
+
+        $(this).attr('title', '<i class="fa fa-spinner fa-spin"></i>')
+        $(this).tooltip('update')
+
+    })
+</script>
+{{/section}} --}}
+
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Thể Loại</h1>
+<p class="mb-4">Trang dùng để chỉnh sửa thông tin thể loại </p>
+<!-- DataTales Example -->
+<a href="/admin/the-loai/add" class="btn btn-success btn-icon-split mb-2">
+    <span class="icon text-white-50">
+        <i class="fas fa-plus"></i>
+    </span>
+    <span class="text">Tạo thể loại</span>
+</a>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách thể loại</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Tên Không Dấu</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each list_TheLoai}}
+                    <tr>
+                        <td>{{ID}}</td>
+                        <td>{{Ten}}</td>
+                        <td>{{TenKhongDau}}</td>
+                        <td><a href="/admin/the-loai/edit/{{ID}}"><i class="fa fa-edit"></i></a>
+                            <form method="POST" action="/admin/the-loai/delete">
+                                <input type="hidden" value="{{ID}}" name="ID" />
+                                <button type="submit"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

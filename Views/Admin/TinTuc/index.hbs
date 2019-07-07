@@ -1,0 +1,54 @@
+{{#section 'js'}}
+<!-- Page level plugins -->
+<script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/admin/js/demo/datatables-demo.js"></script>
+{{/section}}
+{{#section 'css'}}
+<link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{{/section}}
+
+
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Bài viết</h1>
+<a href="/admin/tin-tuc/add" class="btn btn-success btn-icon-split mb-2">
+    <span class="icon text-white-50">
+        <i class="fas fa-plus"></i>
+    </span>
+    <span class="text">Tạo bài viết</span>
+</a>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách bài viết</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Tiêu đề</th>
+                        <th>Loại Tin</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each listBlog}}
+                    <tr>
+                        <td><img height="50" src="{{ImageURL}}"></td>
+                        <td>{{TieuDe}}</td>
+                        <td>{{LoaiTin_Ten}}</td>
+                        <td>
+                            <a href="/admin/blog/edit/{{ID}}"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

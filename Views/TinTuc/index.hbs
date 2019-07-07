@@ -1,0 +1,111 @@
+<div class="row">
+
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-9">
+
+        <!-- Blog Post -->
+        {{#with tin_tuc}}
+        <h1>{{TieuDe}}</h1>
+        <p class="lead">
+            by <a href="#">{{CreateBy}}</a>
+        </p>
+        <p><span class="glyphicon glyphicon-time"></span> {{CreateAt}}</p>
+
+        <p class="lead">{{Tomtat}}</p>
+        <hr>
+        {{{NoiDung}}}
+
+        <hr>
+        {{#if ../layoutMDW.isLogin}}
+        <div class="well">
+            <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
+            <form role="form" method="POST" action="/tin-tuc/comment">
+            <input type="hidden" name="tin_tuc_ID" value="{{ID}}" />
+            <input type="hidden" name="url" value="{{TieuDeKhongDau}}" />
+                <div class="form-group">
+                    <textarea class="form-control" name="NoiDung" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Gửi</button>
+            </form>
+        </div>
+        {{else}}
+        <p class="mt-2 text-center">Vui lòng đăng nhập để bình luận</p>
+        {{/if}}
+        {{/with}}
+
+        <hr>
+
+        <!-- Posted Comments -->
+        {{#each comment}}
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="http://placehold.it/64x64" alt="">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">{{Name}}
+                    <small>{{CreateAt}}</small>
+                </h4>
+                {{{NoiDung}}}
+            </div>
+        </div>
+        {{/each}}
+        <!-- Comment -->
+
+
+
+    </div>
+
+    <!-- Blog Sidebar Widgets Column -->
+    <div class="col-md-3">
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>Tin liên quan</b></div>
+            <div class="panel-body">
+                {{#each LienQuan}}
+                <!-- item -->
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-5">
+                        <a href="detail.html">
+                            <img class="img-responsive" src="image/320x150.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-7">
+                        <a href="#"><b>{{TieuDe}}</b></a>
+                    </div>
+                    <p>{{Tomtat}}</p>
+                    <div class="break"></div>
+                </div>
+                <!-- end item -->
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>Tin nổi bật</b></div>
+            <div class="panel-body">
+                {{#each NoiBat}}
+                <!-- item -->
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-5">
+                        <a href="detail.html">
+                            <img class="img-responsive" src="image/320x150.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-7">
+                        <a href="#"><b>{{TieuDe}}</b></a>
+                    </div>
+                    <p>{{Tomtat}}</p>
+                    <div class="break"></div>
+                </div>
+                <!-- end item -->
+
+                {{/each}}
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /.row -->

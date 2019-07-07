@@ -1,0 +1,99 @@
+{{#section 'js'}}
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('create-blog-image-feature');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+    CKEDITOR.replace('ckeditor-addblog', {
+        "extraPlugins": 'imagebrowser',
+        "imageBrowser_listUrl": "/admin/file/list",
+    });
+    //var toolbarOptions = [
+     //   ['bold', 'italic', 'underline', 'strike'],
+    ////    ['blockquote', 'code-block'],
+     //   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    //    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    //    [{ 'script': 'sub' }, { 'script': 'super' }],
+    //    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    //    [{ 'direction': 'rtl' }],
+    //    [{ 'size': ['small', false, 'large', 'huge'] }],
+    //    ['link', 'image', 'video', 'fomula'],
+    //    [{ 'font': [] }],
+    //    [{ 'align': [] }]
+   // ];
+   // var quill = new Quill('#editor', {
+    //        toolbar: toolbarOptions
+     //   },
+     //   theme: 'snow'
+    //})
+    //$('#create-blog-submit').on('click', function () {
+    //    var delta = quill.getContents().ops;
+    //    //object delta to string to save on db
+
+    ////    $('#blog-DataContent').val(JSON.stringify(delta));
+    //    console.log($('#blog-DataContent').val());
+    //    $('#create-blog').submit();
+   // })
+</script>
+{{/section}}
+
+{{!-- {{#section 'css'}}
+<link href="/quill/quill/dist/quill.snow.css" rel="stylesheet">
+{{/section}} --}}
+<form id="create-blog" method="POST" enctype="multipart/form-data" action="/admin/tin-tuc/add">
+
+    <div class="row m-0">
+        <div class="col-md-8 col-sm-12">
+
+            <div class="form-group">
+                <label>Tiêu đề</label>
+                <input class="form-control" maxlength="200" id="Title" type="text" name="TieuDe"
+                    oninput="$('#TieuDeKhongDau').val(change_alias($(this).val()));" placeholder="Tiêu đề bài viết" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Tiêu đề không dấu</label>
+                <input class="form-control" type="text" name="MetaTitle" id="TieuDeKhongDau" readonly placeholder="" />
+            </div>
+
+
+            <div class="form-group">
+                <label>Tóm tắt</label>
+                <textarea class="form-control" type="text" name="Tomtat" id="Description" rows="3"
+                    placeholder=""></textarea>
+            </div>
+            {{!-- <input type="hidden" name="Content" id="blog-content">
+            <input type="hidden" name="DataContent" id="blog-DataContent">
+            <div class="form-group">
+                <label>Nội dung</label>
+                <div id="toolbar">
+
+                </div>
+                <div id="editor"></div>
+            </div> --}}
+            <textarea id="ckeditor-addblog" name="Content" required>&nbsp;</textarea>
+
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+                <label>Loại tin</label>
+                <input class="form-control" name="Category" type="text">
+            </div>
+            <input type="file" required accept="image/*" name="FileImage" onchange="loadFile(event)">
+            <img class="w-100" id="create-blog-image-feature" />
+        </div>
+    </div>
+
+    <button  id="create-blog-submit" type="submit" class="btn btn-primary btn-icon-split mt-3">
+        <span class="icon text-white-50">
+            <i class="fas fa-check"></i>
+        </span>
+        <span class="text">Đăng bài</span>
+    </button>
+</form>
+{{!-- <form action="/admin/blog/test" method="POST" enctype="multipart/form-data">
+    <input type="file" accept="image/*" name="Image" >
+    <button type="submit">submit</button>
+</form> --}}

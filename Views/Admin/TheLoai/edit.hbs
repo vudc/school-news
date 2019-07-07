@@ -1,0 +1,17 @@
+{{#with theloai}}
+<form method="POST" action="/admin/the-loai/edit">
+    <input type="hidden" name="ID" value="{{ID}}" />
+    <div class="form-group">
+        <label>Tên</label>
+        <input oninput="$('#TenKhongDau').val(change_alias($(this).val()));" type="text" class="form-control" value="{{Ten}}" name="Ten"/>
+    </div>
+
+    <div class="form-group">
+        <label>Tên Không Dấu</label>
+        <input type="text" id="TenKhongDau" readonly class="form-control" value="{{TenKhongDau}}" name="TenKhongDau"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu lại</button>
+
+</form>
+{{/with}}
