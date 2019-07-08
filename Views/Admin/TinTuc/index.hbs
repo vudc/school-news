@@ -39,11 +39,16 @@
                 <tbody>
                     {{#each listBlog}}
                     <tr>
-                        <td><img height="50" src="{{ImageURL}}"></td>
+                        <td><img height="50" src="/upload/feature/{{Hinh}}"></td>
                         <td>{{TieuDe}}</td>
                         <td>{{LoaiTin_Ten}}</td>
                         <td>
-                            <a href="/admin/blog/edit/{{ID}}"><i class="fa fa-edit"></i></a>
+                            <form method="POST" action="/admin/tin-tuc/delete">
+                            <input type="hidden"  value="{{ID}}" name="ID"/>
+                                <button type="submit"><i class="fa fa-trash"></i></button>
+                            </form>
+
+
                         </td>
                     </tr>
                     {{/each}}

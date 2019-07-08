@@ -8,6 +8,7 @@ moment.locale("vi");
 var router = express.Router();
 router.get("/:TieuDe", (req, res) => {
   TinTucRepo.GetOne(req.params.TieuDe).then(async r => {
+    console.log(r)
     r[0].CreateAt = moment(r[0].CreateAt).fromNow();
     var lienquan = TinTucRepo.GETByloai_tin_ID(r[0].loai_tin_ID);
     var noibat = TinTucRepo.GetList(4);

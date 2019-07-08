@@ -50,3 +50,12 @@ exports.delete = (ID)=>{
   console.log(sql)
   return db.save(sql)
 }
+exports.GetAllEx = () => {
+  var sql = `select loai_tin.ID as ID,
+  loai_tin.Ten as Ten,
+  the_loai.Ten as Ten_The_Loai
+  from loai_tin, the_loai
+  where loai_tin.the_loai_ID = the_loai.ID
+  `;
+  return db.load(sql);
+};

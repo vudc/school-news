@@ -55,13 +55,13 @@
 
             <div class="form-group">
                 <label>Tiêu đề không dấu</label>
-                <input class="form-control" type="text" name="MetaTitle" id="TieuDeKhongDau" readonly placeholder="" />
+                <input class="form-control" type="text" name="TieuDeKhongDau" id="TieuDeKhongDau" readonly placeholder="" />
             </div>
 
 
             <div class="form-group">
                 <label>Tóm tắt</label>
-                <textarea class="form-control" type="text" name="Tomtat" id="Description" rows="3"
+                <textarea class="form-control" type="text" name="TomTat" id="TomTat" rows="3"
                     placeholder=""></textarea>
             </div>
             {{!-- <input type="hidden" name="Content" id="blog-content">
@@ -73,13 +73,17 @@
                 </div>
                 <div id="editor"></div>
             </div> --}}
-            <textarea id="ckeditor-addblog" name="Content" required>&nbsp;</textarea>
+            <textarea id="ckeditor-addblog" name="NoiDung" required>&nbsp;</textarea>
 
         </div>
         <div class="col-md-4 col-sm-12">
             <div class="form-group">
                 <label>Loại tin</label>
-                <input class="form-control" name="Category" type="text">
+                <select class="form-control" name="loai_tin_ID" id="">
+                    {{#each list_loaitin}}
+                    <option value="{{ID}}">{{Ten_The_Loai}} / {{Ten}}</option>
+                    {{/each}}
+                </select>
             </div>
             <input type="file" required accept="image/*" name="FileImage" onchange="loadFile(event)">
             <img class="w-100" id="create-blog-image-feature" />

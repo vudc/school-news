@@ -2,6 +2,7 @@ var express = require('express');
 var multer = require('multer');
 var path = require('path');
 var TinTucRepos = require('../repos/TinTucRepos');
+var LoaiTinRepos = require('../repos/LoaiTinRepos')
 var router = express.Router();
 var crypto = require('crypto');
 //admin layout
@@ -31,24 +32,35 @@ router.get('/', (req, res) => {
 })
 
 router.get('/add',(req, res) => {
-    var vm = {
-        layout: layout,
-        title: ''
-    }
-    return res.render('Admin/TinTuc/add', vm);
+    LoaiTinRepos.GetAllEx().then(r=>{
+        var vm = {
+            layout: layout,
+            title: '',
+            list_loaitin:r
+        }
+        return res.render('Admin/TinTuc/add', vm);
+    })
+    
 })
 router.post('/add',upload.single('FileImage'), function (req, res) {
     var blog = req.body;
     blog.TieuDe = blog.TieuDe.replace(/'/g, "\\\'");
     blog.NoiDung = blog.NoiDung.replace(/'/g, "\\\'");
     blog.TomTat = blog.TomTat.replace(/'/g, "\\\'");
-    BlogRepos.AddNew(req.body, blog.Description, blog.Category, req.file.filename).then(r => {
-        res.redirect('/admin/blog');
+    console.log(blog.TomTat)
+    blog.Hinh = req.file.filename
+    blog.user_ID = req.user.ID
+    TinTucRepos.AddNew(blog).then(r => {
+        res.redirect('/admin/tin-tuc');
     }).catch(err => {
         res.send(err);
     })
 })
-
+router.post('/delete',(req,res)=>{
+    TinTucRepos.delete(req.body.ID).then(r=>{
+      return res.redirect('/admin/tin-tuc');
+    })
+  })
 router.get('/edit/:blogID', (req, res) => {
     BlogRepos.GETOne(req.params.blogID).then(result => {
         if (result) {
